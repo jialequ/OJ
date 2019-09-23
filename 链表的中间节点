@@ -1,0 +1,18 @@
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        ListNode* first = head;
+        ListNode* end = head;
+        while(first != nullptr)
+        {
+            first = first->next;
+            if(first == nullptr)
+            {
+                break;
+            }
+            end = end->next;
+            first = first->next;
+        }
+        return end;
+    }
+};
