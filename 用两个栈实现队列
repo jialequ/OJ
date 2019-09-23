@@ -1,0 +1,27 @@
+class Solution
+{
+public:
+    void push(int node) {
+        //只做push操作,不用担心stack2是不是空
+        stack1.push(node);
+    }
+
+    int pop() {
+        //如果stack2 为空, 再将stack1中的元素都挪过来
+        if(stack2.empty())
+        {
+            while(!stack1.empty())
+            {
+                stack2.push(stack1.top());
+                stack1.pop();
+            }
+        }
+        int font = stack2.top();
+        stack2.pop();
+        return font;
+    }
+
+private:
+    stack<int> stack1;
+    stack<int> stack2;
+};
