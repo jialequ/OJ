@@ -1,0 +1,50 @@
+class Solution {
+public:
+
+Node* copyRandomList(Node* head) {
+        if(head == NULL)
+        {
+            return NULL;
+        }
+        // creat newnode,insert newnode after oldnode
+        Node *cur = head;
+        while(cur != NULL)
+        {
+            Node *newnode = (Node *)malloc(sizeof(Node));
+            newnode->val = cur->val;
+            newnode->next = NULL;
+            newnode->next = cur->next;
+            cur->next = newnode;
+            cur = newnode->next;
+        }
+        // copy random
+        cur = head;
+        while(cur != NULL)
+        {
+            Node *newnode = cur->next;
+            if(cur->random == NULL)
+            {
+                newnode->random = NULL;
+            }
+            else
+            {
+                newnode->random = cur->random->next;
+            }
+            cur = cur->next->next;
+        }
+        // separate list
+        cur = head;
+        Node *newhead = head->next;
+        while(cur != NULL)
+        {
+            Node *newnode = cur->next;
+            cur->next = newnode->next;
+            if(newnode->next != NULL)
+            {
+                newnode->next = newnode->next->next;
+            }
+            cur = cur->next;
+        }
+        return newhead;
+    }
+};
