@@ -1,0 +1,15 @@
+class Solution {
+public:
+    void replaceSpace(char *str,int length) {
+        string s1(str);
+        int i = 0;
+        while((i = s1.find(' ',i)) > -1)
+        {
+            s1.erase(i,1);
+            s1.insert(i, "%20");
+        }
+        auto ret = s1.c_str();
+        strcpy(str,ret);
+         
+    }
+};
