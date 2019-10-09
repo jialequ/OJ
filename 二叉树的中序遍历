@@ -1,0 +1,20 @@
+int size;
+
+void Preorder(struct TreeNode *root)
+{
+    if(root != NULL)
+    {
+       // printf("%d",root->val);
+         Preorder(root->left);
+        array[size++] = root->val;  //顺序表的尾插
+        Preorder(root->right);
+    }
+}
+
+int* inorderTraversal(struct TreeNode* root, int* returnSize) {
+        array = (int *)malloc(sizeof(int) *10000);
+    size = 0;
+    Preorder(root);
+    *returnSize = size;
+    return array;
+}
