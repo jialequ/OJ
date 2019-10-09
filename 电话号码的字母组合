@@ -1,0 +1,35 @@
+string letterMap[]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+
+class Solution {
+public:
+    void com(const string& digits,int depth,const string& curStr,vector<string>& v)
+    {
+        //终止条件, 递归深度 == 字母长度
+        if(depth == digits.size())
+        {
+            v.push_back(curStr);
+            return ;
+        }
+        
+        //没有终止, 继续拼接
+        //depth : 0     digits : 23     2 : abc 
+        string letters = letterMap[digits[depth] - '0'];
+        for(const auto& e : letters)
+        {
+            com(digits,depth + 1,curStr + e,v);
+        }
+    }
+    vector<string> letterCombinations(string digits) {
+        vector<string> v;
+        
+        if(digits.empty())
+        {
+            return v;
+        }
+        
+        int depth = 0;
+        string curStr;
+        com(digits, depth, curStr, v);
+        return v;
+    }
+};
