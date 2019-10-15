@@ -1,0 +1,27 @@
+class ret{
+public:
+    ret()
+    {
+        ++N;
+        sum += N;
+    }
+    static void reset(){N = 0;sum = 0;}
+    static int getsum(){ return sum;}
+private:
+    static int N;
+    static int sum;
+};
+int ret::N = 0;
+int ret::sum = 0;
+class Solution {
+public:
+     
+    int Sum_Solution(int n) {
+           
+        ret::reset();
+        ret *a = new ret[n];
+        delete[] a;
+        a = nullptr;
+        return ret::getsum();
+    }
+};
