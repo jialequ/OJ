@@ -1,0 +1,36 @@
+class Solution {
+public:
+    ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
+    {
+        //如果有一个链表为空, 就返回另一个链表
+        if(pHead1 == NULL)
+            return pHead2;
+        if(pHead2 == NULL)
+            return pHead1;
+        //创建一个带头的链表, 然后将pHead1 和pHead2开始比较, 小的就插入到新链表中
+        ListNode* newhead = new ListNode(-1);
+        ListNode* ptr = newhead;
+        ListNode* p1 = pHead1;
+        ListNode* p2 = pHead2;
+        while(p1 && p2)
+        {
+            if(p1->val <= p2->val)
+            {
+                ptr->next = p1;
+                p1 = p1->next;
+            }
+            else if(p1->val >= p2->val)
+            {
+                ptr->next = p2;
+                p2 = p2->next;
+            }
+            ptr = ptr->next;
+        }
+        //如果有一个先遍历完了, 那么就把另一个后面的所有结点插入到新链表的末尾
+        if(p1 == NULL)
+            ptr->next = p2;
+        if(p2 == NULL)
+            ptr->next = p1;
+        return newhead->next;
+    }
+};
