@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool flag = false;
+    double Power(double base, int exponent) {
+        //判断是不是0的负数次方
+        if(equal(base, 0.0) && exponent < 0)
+        {
+            flag = true;
+            return 0.0;
+        }
+        //定义一个变量, 如果exponen是负数, 则abse就是它的绝对值;
+        unsigned int abse = (unsigned int)(exponent);
+        if(exponent < 0)
+            abse = (unsigned int)(-exponent);
+        //实际计算出的result
+        double res = 1.0;
+        for(int i = 0;i < abse;i++)
+            res *= base;
+        //如果exponent是负数, 就取倒数
+        if(exponent < 0)
+            res = 1.0 / res;
+        
+        return res;
+    }
+    bool equal(double a, double b)
+    {
+        //判断两个小数是否相等
+        if((a - b < 0.0000001) && (a - b > -0.0000001))
+            return true;
+        return false;
+    }
+};
