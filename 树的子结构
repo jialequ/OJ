@@ -1,0 +1,21 @@
+class Solution {
+public:
+bool issame(TreeNode *p,TreeNode *q)
+    {
+        if(q == NULL)
+            return true;
+        if(p == NULL)
+            return false;
+        return p->val == q->val
+            && issame(p->left, q->left)
+            && issame(p->right, q->right);
+    }
+    bool HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2)
+    {
+        if(pRoot1 == NULL || pRoot2 == NULL)
+            return false;
+        return issame(pRoot1, pRoot2)
+            || HasSubtree(pRoot1->left, pRoot2)
+            || HasSubtree(pRoot1->right, pRoot2);
+    }
+};
