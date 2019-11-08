@@ -1,0 +1,77 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+void Display(vector<int>& c, vector<int>& r)
+{
+	size_t pos = r.size() - 2;
+	for (; pos >= 0; pos--){
+		if (r[pos] == r[r.size() - 1])
+			break;
+	}
+	cout << c[0] << ".";
+	size_t i;
+	for (i = 1; i < pos + 1; i++)
+		cout << c[i];
+	cout << '(';
+	for (i; i < c.size() - 1; i++)
+		cout << c[i];
+	cout << ')';
+}
+void cal()
+{
+	int N, D;
+	scanf("%d/%d", &N, &D);
+	if (D == 0){
+		cout << "分母不能为0" << endl;
+		return;
+	}
+	vector<int> c;
+	int con = 0;  //商
+	//确定第一位
+	con = N / D;
+	c.push_back(con);
+	N %= D;
+	vector<int> r;
+	int rem = N;
+	int count = 0; //计算小数点后的位数
+	bool flag = false; //判断是否有循环节
+	while (1){
+		//将商push进c数组中, 最后进行打印
+		con = rem * 10 / D;
+		count++;
+		if (count == 100){
+			cout << c[0] << '.';
+			for (size_t i = 1; i < c.size(); i++)
+				cout << c[i];;
+			return;
+		}
+		c.push_back(con);
+		//计算余数, push进r中, 进行判断
+		rem = rem * 10 % D;
+		//如果余数为0, 则为100位之内的不循环的小数
+		if (rem == 0){
+			cout << c[0] << '.';
+			for (size_t i = 1; i < c.size(); i++)
+				cout << c[i];
+			return;
+		}
+		//在r中搜索, 看看余数是否出现过, 如果出现过, 则开始出现循环节
+		for (const auto e : r){
+			if (e == rem){
+				flag = true;
+				break;
+			}
+		}
+		r.push_back(rem);
+		if (flag == true){
+			Display(c, r);
+			return;
+		}
+	}
+}
+int main()
+{
+	cal();
+	system("pause");
+	return 0;
+}
