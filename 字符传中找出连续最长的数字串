@@ -1,0 +1,32 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    string s, prs, res;
+    cin >> s;
+    for(int i = 0;i <= s.size();i++)
+    {
+        //字符串遍历必须循环到最后一个, s[size()]虽然是越界的但是我们并没有使用
+        if(s[i] >= '0' && s[i] <= '9')
+        {
+            res += s[i];
+        }
+        else
+        {
+            if(prs.size() < res.size())
+            {
+                prs = res;
+            }
+            else
+            {
+                res.clear();
+            }
+        }
+    }
+    cout << prs;
+    
+    return 0;
+}
