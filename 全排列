@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+void Permutation(vector<char>& a, int m, int n){
+	if (m == n){
+		cout << a[0];
+		for (int i = 1; i < n; i++){
+			cout << " " << a[i];
+		}
+		cout << endl;
+	}
+	else {
+		for (int i = m; i < n; i++){
+			int temp = a[m];
+			a[m] = a[i];
+			a[i] = temp;
+			Permutation(a, m + 1, n);
+			temp = a[m];
+			a[m] = a[i];
+			a[i] = temp;
+		}
+	}
+}
+void test()
+{
+	vector<char> a = { 'x', 'y', 'z' };
+	vector<char> b = a;
+	for (size_t i = 0; i < a.size(); i++)
+	{
+		Permutation(b, 1, b.size());
+		b = a;
+		if (i == 2)
+			break;
+		swap(b[0], b[i + 1]);
+	}
+}
+int main()
+{
+	test();
+	system("pause");
+	return 0;
+}
