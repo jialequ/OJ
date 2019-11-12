@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	string s;
+	string s1;
+	string s2;
+	cin >> s1;
+	cin >> s2;
+	size_t i = 0, j = 0;
+	while (i < s1.size() && j < s2.size())
+	{
+		//哪个小就把哪个push_back进入string中
+		if (s1[i] < s2[j])
+		{
+			s.push_back(s1[i++]);
+		}
+		else
+		{
+			s.push_back(s2[j++]);
+		}
+	}
+	while (i < s1.size())
+	{
+		s.push_back(s1[i++]);
+	}
+	while (j < s2.size())
+	{
+		s.push_back(s2[j++]);
+	}
+	cout << s << endl;
+    	system("pause");
+	return 0;	
+}
