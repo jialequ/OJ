@@ -1,0 +1,30 @@
+	int StrToInt(string str) {
+		if (str.empty())
+			return 0;
+		auto sit = str.begin();
+		long long ret = 0;
+		bool flag = false;
+		while (sit != str.end())
+		{
+			ret *= 10;
+			if (*sit >= '0' && *sit <= '9')
+			{
+				ret += (*sit - '0');
+			}
+			else if (*sit == '-' || *sit == '+')
+			{
+				if (*sit == '-')
+					flag = true;
+			}
+			else
+			{
+				return 0;
+			}
+			sit++;
+		}
+		if (flag == true)
+			ret = (-ret);
+		if (ret <= INT_MAX && ret >= INT_MIN)
+			return ret;
+		return 0;
+	}
