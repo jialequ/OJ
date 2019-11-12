@@ -1,0 +1,26 @@
+class Parenthesis {
+public:
+    bool chkParenthesis(string A, int n) {
+        // write code here
+        if (A[0] == ')')
+            return false;
+        stack<char> s;
+        for (int i = 0; i < n; i++)
+        {
+            if (A[i] == '(')
+                s.push(A[i]);
+            else if (A[i] == ')')
+            {
+                if (s.top() == '(')
+                    s.pop();
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
+        if (s.empty())
+            return true;
+        return false;
+    }
+};
