@@ -1,0 +1,50 @@
+string addStrings(string num1, string num2) {
+        //先把长度拿到
+        int len1 = num1.size() - 1;
+        int len2 = num2.size() - 1;
+        //进位
+        int step = 0;
+        //当前位的和
+        int curnum = 0;
+        //先把空间开好, 避免内部增容耗时
+        int capacity = len1 > len2 ? len1 + 1 : len2 + 1;
+        string ret;
+        
+        ret.reserve(capacity);
+        while(len1 >= 0 || len2 >= 0)
+        {
+            //先加上进位
+            curnum = step;
+            //如果还是有效位, 加当前位
+            if(len1 >= 0)
+            {
+                curnum += num1[len1] - '0';
+            }
+            if(len2 >= 0)
+            {
+                curnum += num2[len2] - '0';
+            }
+            //判断是否要进位
+            if(curnum > 9)
+            {
+                step = 1;
+                curnum -= 10;
+            }
+            else
+            {
+                step = 0;
+            }
+            //尾插
+            ret += curnum + '0';
+            
+            --len1;
+            --len2;
+        }
+        //完了之后判断最后一位有没有进位
+        if(step == 1)
+        {
+            ret += '1';
+        }
+        reverse(ret.begin(),ret.end());
+        return ret;
+    }
