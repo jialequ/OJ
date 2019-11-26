@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+bool IsTrue(const char *g, const char *r)
+{
+    if(*g == '\0' && *r == '\0')
+        return true;
+    if(*g == '\0' || *r == '\0')
+        return false;
+    if(*g == '?')
+        return IsTrue(g + 1, r + 1);
+    else if(*g == '*')
+        return IsTrue(g + 1, r) || IsTrue(g + 1, r + 1) || IsTrue(g, r + 1);
+    else if(*g == *r)
+        return IsTrue(g + 1, r + 1);
+    return false;
+}
+
+int main()
+{
+    string gr;
+    string res;
+    while(cin >> gr >> res)
+    {
+        bool tmp = IsTrue(gr.c_str(), res.c_str());
+        if(tmp)
+            cout << "true" << endl;
+        else 
+            cout << "false" << endl;
+    }
+    return 0;
+}
