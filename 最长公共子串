@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+    string a;
+    string b;
+    while(cin >> a >> b)
+    {
+        int Max = 0;
+        if(a.size() > b.size())
+            swap(a, b);
+        for(int i = 0; i < a.size(); ++i)
+        {
+            for(int j = i; j < a.size(); ++j)
+            {
+                string ret = a.substr(i, j - i + 1);
+                if((int)b.find(ret) < 0)
+                    break;
+                if(Max < ret.size())
+                    Max = ret.size();
+            }
+        }
+        cout << Max << endl;
+    }
+    return 0;
+}
