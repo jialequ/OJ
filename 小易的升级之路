@@ -1,0 +1,38 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int MaxCon(int a, int b)
+{
+    int number = min(a, b);
+    for(int i = number; i > 1; --i)
+    {
+        if(((a % i) == 0) && ((b % i) == 0))
+            return i;
+    }
+    return 1;
+}
+
+int main()
+{
+    int num, ab;
+    while(cin >> num >> ab)
+    {
+        vector<int> b(num);
+        for(int i = 0; i < num; ++i)
+            cin >> b[i];
+        int c = ab;
+        for(int i = 0; i < num; ++i)
+        {
+            if(b[i] <= c)
+                c += b[i];
+            else if(b[i] > c)
+            {
+                c += MaxCon(b[i], c);
+            }
+        }
+        cout << c << endl;
+    }
+    return 0;
+}
