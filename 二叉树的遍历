@@ -1,0 +1,52 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+typedef struct BTNode
+{
+    char _data;
+    struct BTNode* _left;
+    struct BTNode* _right;
+}BTNode;
+
+void Inorder(BTNode* root)
+{
+    if(root)
+    {
+        Inorder(root->_left);
+        cout << root->_data << ' ';
+        Inorder(root->_right);
+    }
+}
+
+BTNode* CreateBTree(string s, int& p)
+{
+    if(s[p] != '#')
+    {
+        BTNode* root = new BTNode;
+        root->_data = s[p];
+        ++p;
+        root->_left = CreateBTree(s, p);
+        ++p;
+        root->_right = CreateBTree(s, p);
+        return root;
+    }
+    else 
+        return NULL;
+}
+
+int main()
+{
+    string s;
+    int i = 0;
+    //读入字符串
+    while(cin >> s)
+    {
+        //创建二叉树
+        BTNode* root = CreateBTree(s, i);
+        //中序打印二叉树
+        Inorder(root);
+        cout << endl;
+    }
+    return 0;
+}
