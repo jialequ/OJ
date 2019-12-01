@@ -1,0 +1,55 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    struct TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        if(preorder.size() < 1)
+            return NULL;
+        int pindex = 0;
+        return pre_order(preorder, pindex, inorder, 0, inorder.size() - 1);
+    }
+    struct TreeNode* pre_order(vector<int>& pre, int& pindex, vector<int>&                     ino, int inbegin, int inend)
+    {
+        TreeNode* root = new TreeNode(-1);
+        //当前的值就是当前前序遍历的位置的值
+        root->val = pre[pindex];
+        
+        //在中序遍历中搜索根的位置
+        int root_index = inbegin;
+        for(; root_index <= inend; ++root_index)
+        {
+            if(ino[root_index] == root->val)
+                break;
+        }
+        //判断当前节点是否有左右子树
+        //有左子树
+        if(inbegin < root_index)
+        {
+            ++pindex;
+            root->left = pre_order(pre, pindex, ino,inbegin, root_index -  1);
+        }
+        else
+        {
+            root->left = NULL;
+        }
+        //有右子树
+        if(root_index + 1 <= inend)
+        {
+            ++pindex;
+            root->right = pre_order(pre, pindex, ino, root_index + 1, inend);
+        }
+        else
+        {
+            root->right = NULL;
+        }
+        
+        return root;
+    }
+};
